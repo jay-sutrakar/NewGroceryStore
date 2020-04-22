@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:textAlignment="center"
         android:layout_marginEnd="88dp"
-        android:text="Find your groceries at home"
+        android:text="@string/find_your_groceries_at_home"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:textSize="25sp"
@@ -37,7 +37,7 @@
         android:padding="20dp"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Join Now"
+        android:text="@string/join_now"
         android:textColor="@android:color/white"
         android:background="@drawable/buttons"
         >
@@ -55,10 +55,10 @@
         android:padding="20dp"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Already have an account? Login"
+        android:text="@string/already_have_an_account_login"
         android:textColor="@android:color/white"
         android:background="@drawable/buttons">
-        >
+
     </Button>
 
 </RelativeLayout>
