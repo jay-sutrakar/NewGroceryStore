@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context=".RegisterActivity"
     android:background="@drawable/register">
 
@@ -16,13 +17,13 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/input_design"
-        android:hint="Username"
+        android:hint="@string/username"
         android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimary"
         android:inputType="text"
         android:textSize="17sp"
         android:textStyle="bold"
-        >
+        android:importantForAutofill="no">
     </EditText>
 
     <EditText
@@ -35,13 +36,13 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/input_design"
-        android:hint="Phone Number"
+        android:hint="@string/phone_number"
         android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimary"
-        android:inputType="number"
+        android:inputType="phone"
         android:textSize="17sp"
         android:textStyle="bold"
-        >
+        android:importantForAutofill="no">
     </EditText>
 
     <EditText
@@ -54,13 +55,13 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/input_design"
-        android:hint="Password"
+        android:hint="@string/password"
         android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimary"
         android:inputType="textPassword"
         android:textSize="17sp"
         android:textStyle="bold"
-        >
+        android:importantForAutofill="no">
     </EditText>
 
     <EditText
@@ -73,13 +74,13 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/input_design"
-        android:hint="Email"
+        android:hint="@string/email"
         android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimary"
         android:inputType="textEmailAddress"
         android:textSize="17sp"
         android:textStyle="bold"
-        >
+        android:importantForAutofill="no">
     </EditText>
 
     <Button
@@ -91,7 +92,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="6dp"
-        android:text="Create Account"
+        android:text="@string/create_account"
         android:textSize="15sp"
         android:textAllCaps="false"
         android:textStyle="bold"
