@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocerystore.model.Customers;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -70,42 +71,46 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createAccount() {
-        String username, password, phone, email;
+        Customers customer = new Customers();
+        String password;
 
-        username = usernameInput.getText().toString();
-        phone = phoneInput.getText().toString();
-        password = passwordInput.getText().toString();
-        email = emailInput.getText().toString();
+        customer.setUsername(usernameInput.getText().toString().trim());
+        customer.setPhone(phoneInput.getText().toString().trim());
+        customer.setEmail(emailInput.getText().toString().trim());
+        customer.setPassword(passwordInput.getText().toString().trim());
 
         //check if credentials are empty
-        if (TextUtils.isEmpty(username)) {
+        if (TextUtils.isEmpty(usernameInput.getText())) {
             Toast.makeText(this, "Please Enter your username", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(phone)) {
+        } else if (TextUtils.isEmpty(phoneInput.getText())) {
             Toast.makeText(this, "Please Enter your phone", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(email)) {
+        } else if (TextUtils.isEmpty(emailInput.getText())) {
             Toast.makeText(this, "PLease Enter your email", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(passwordInput.getText())) {
+            Toast.makeText(this, "PLease Enter your Password", Toast.LENGTH_SHORT).show();
         } else {
             loadingBar.setTitle("Creating Account");
             loadingBar.setMessage("Please wait while we are checking the credentials");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
-            validateUser(username, phone, password, email);
+            validateUser(customer);
         }
     }
 
     //write your code here for adding customer into database
-    private void validateUser(final String username, final String phone, final String password, final String email) {
+    private void validateUser(final Customers customer) {
+        final String email = customer.getEmail();
+        String password = customer.getPassword();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Map<String, Object> user = new HashMap<>();
                         user.put("userId", firebaseAuth.getUid());
-                        user.put("username", username);
+                        user.put("username", customer.getUsername());
                         user.put("email", email);
-                        user.put("phone", phone);
-                        user.put("password", password);
+                        user.put("phone", customer.getPhone());
 
                         // Here we are adding the details of user and his id in firestore cloud database
                         collectionReference.add(user)

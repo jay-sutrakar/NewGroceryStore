@@ -3,6 +3,9 @@ package com.example.grocerystore.model;
 public class Customers {
     private String username, phone, password, email;
 
+    public Customers() {
+    }
+
     public String getUsername() {
         return username;
     }
