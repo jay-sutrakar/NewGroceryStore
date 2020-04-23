@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,23 +30,35 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText usernameInput, passwordInput, phoneInput, emailInput;
     private ProgressDialog loadingBar;
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
-    private CollectionReference collectionReference = db.collection("Users");
+    private TextView signInInstead;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection("Customers");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         //Initialization of firebaseauth
         firebaseAuth = FirebaseAuth.getInstance();
-        Log.d("FirebaseAuth instance ", "onCreate: "+firebaseAuth);
+        Log.d("FirebaseAuth instance ", "onCreate: " + firebaseAuth);
+
         //Initializing
-        createAccountButton = findViewById(R.id.register_button);
-        usernameInput =  findViewById(R.id.register_username_input);
-        phoneInput =  findViewById(R.id.register_phone_input);
-        passwordInput =  findViewById(R.id.register_password_input);
-        emailInput =  findViewById(R.id.register_email_input);
+        createAccountButton = (Button) findViewById(R.id.register_button);
+        usernameInput =  (EditText) findViewById(R.id.register_username_input);
+        phoneInput = (EditText) findViewById(R.id.register_phone_input);
+        passwordInput = (EditText) findViewById(R.id.register_password_input);
+        emailInput = (EditText) findViewById(R.id.register_email_input);
+        signInInstead = (TextView) findViewById(R.id.register_signin);
         loadingBar = new ProgressDialog(this);
+
+        signInInstead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //On click create account
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +96,18 @@ public class RegisterActivity extends AppCompatActivity {
 
     //write your code here for adding customer into database
     private void validateUser(final String username, final String phone, final String password, final String email) {
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Map<String,String> user = new HashMap<>();
-                        user.put("userId",firebaseAuth.getUid());
-                        user.put("username",username);
-                        // Here we are adding the details of user and its id in firestore cloud database
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("userId", firebaseAuth.getUid());
+                        user.put("username", username);
+                        user.put("email", email);
+                        user.put("phone", phone);
+                        user.put("password", password);
+
+                        // Here we are adding the details of user and his id in firestore cloud database
                         collectionReference.add(user)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override

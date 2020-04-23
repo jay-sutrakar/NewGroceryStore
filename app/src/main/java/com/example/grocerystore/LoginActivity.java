@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,18 +26,29 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private ProgressDialog loadingBar;
     private FirebaseAuth firebaseAuth;
+    private TextView createNewAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        //............................
-        email=findViewById(R.id.login_email_input);
-        password=findViewById(R.id.login_password_input);
-        loginButton=findViewById(R.id.login_button);
+        //Initialization
+        email = (EditText) findViewById(R.id.login_email_input);
+        password = (EditText) findViewById(R.id.login_password_input);
+        loginButton = (Button) findViewById(R.id.login_button);
         loadingBar = new ProgressDialog(this);
+        createNewAccount = (TextView) findViewById(R.id.login_register);
+
+        createNewAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +57,12 @@ public class LoginActivity extends AppCompatActivity {
                 loadingBar.setMessage("Please wait while we are checking the credentials");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
+
                 String useremail = email.getText().toString().trim();
                 String userpassword = password.getText().toString().trim();
+
                 if (!TextUtils.isEmpty(useremail) && !TextUtils.isEmpty(userpassword)) {
-                    getVarified(useremail,userpassword);
+                    getVerified(useremail, userpassword);
                 } else {
                     loadingBar.dismiss();
                     Toast.makeText(LoginActivity.this, "Fields Should be Empty", Toast.LENGTH_SHORT).show();
@@ -58,13 +72,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void getVarified(String useremail, String userpassword) {
+    private void getVerified(String useremail, String userpassword) {
         firebaseAuth.signInWithEmailAndPassword(useremail,userpassword)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         loadingBar.dismiss();
-                        startActivity(new Intent(LoginActivity.this,itemListActivity.class));
+                        startActivity(new Intent(LoginActivity.this, ItemListActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

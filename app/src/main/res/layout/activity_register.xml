@@ -15,7 +15,7 @@
         android:padding="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/input_design"
         android:hint="@string/username"
         android:textColorHint="@color/colorPrimaryDark"
@@ -99,4 +99,18 @@
         android:padding="17dp"
         >
     </Button>
+
+    <TextView
+        android:id="@+id/register_signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Or sign in instead"
+        android:layout_below="@+id/register_button"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryDark"
+        >
+    </TextView>
 </RelativeLayout>
