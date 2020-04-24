@@ -9,4 +9,11 @@
     <string name="username">Username</string>
     <string name="create_account">Create Account</string>
     <string name="phone_number">Phone Number</string>
+    <string name="cart">Cart</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Price</string>
+    <string name="quantity">Qty</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="item_added_successfully">Item added Successfully</string>
 </resources>
