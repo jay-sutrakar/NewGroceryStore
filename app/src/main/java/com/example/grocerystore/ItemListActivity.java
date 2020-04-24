@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemListActivity extends AppCompatActivity implements View.OnClickListener{
+public class ItemListActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private RecyclerView recyclerView;
     private ItemRecyclerViewAdapter itemRecyclerViewAdapter;
@@ -39,7 +39,7 @@ public class ItemListActivity extends AppCompatActivity implements View.OnClickL
         firebaseAuth=FirebaseAuth.getInstance();
 
         user=firebaseAuth.getCurrentUser();
-        Log.d("TAG", "onCreate: "+ user.getUid());
+        Log.d("ItemListActivity", "onCreate: "+ user.getUid());
 
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -115,8 +115,5 @@ public class ItemListActivity extends AppCompatActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }
