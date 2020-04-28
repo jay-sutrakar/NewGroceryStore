@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("Error in sign in ", "onFailure: "+e.getMessage());
+                        Log.d("Error in sign in ", "onFailure: " + e.getMessage());
                     }
                 });
     }

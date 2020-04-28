@@ -47,7 +47,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull ItemRecyclerViewAdapter.ViewHolder holder, int position) {
-        Product product=productList.get(position);
+        Product product = productList.get(position);
         Log.d("TAG", "onBindViewHolder: "+product.getProductName());
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getProductPrice());
@@ -91,8 +91,8 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 context.startActivity(new Intent(context,MainActivity.class));
             }
 
-            CollectionReference collectionReference = db.collection("Cart")
-                    .document(user.getUid()).collection("products");
+            CollectionReference collectionReference;
+            collectionReference = db.collection("Cart").document(user.getUid()).collection("products");
 
             collectionReference.add(product)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

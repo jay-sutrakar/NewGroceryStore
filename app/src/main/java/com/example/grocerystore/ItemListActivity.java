@@ -31,17 +31,18 @@ public class ItemListActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user;
     private CollectionReference collectionReference = db.collection("CartItems");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        user=firebaseAuth.getCurrentUser();
-        Log.d("TAG", "onCreate: "+ user.getUid());
+        user = firebaseAuth.getCurrentUser();
+        Log.d("TAG", "onCreate: " + user.getUid());
 
-        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -89,9 +90,6 @@ public class ItemListActivity extends AppCompatActivity implements View.OnClickL
 
         itemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ItemListActivity.this,productList);
         recyclerView.setAdapter(itemRecyclerViewAdapter);
-
-
-
     }
 
     @Override
@@ -103,12 +101,10 @@ public class ItemListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.cart_menu:
-                startActivity(new Intent(ItemListActivity.this,CartActivity.class));
+            case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
                 break;
-            case R.id.sign_out:
-                firebaseAuth.signOut();
-                startActivity(new Intent(ItemListActivity.this,MainActivity.class));
+            case R.id.sign_out: firebaseAuth.signOut();
+                startActivity(new Intent(ItemListActivity.this, MainActivity.class));
                 finish();
                 break;
         }
