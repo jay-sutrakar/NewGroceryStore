@@ -11,14 +11,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.ProgressBar;
 
 import com.example.grocerystore.adapter.ItemRecyclerViewAdapter;
 import com.example.grocerystore.util.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,70 +33,46 @@ public class ItemListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ItemRecyclerViewAdapter itemRecyclerViewAdapter;
     private List<Product> productList;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
     private FirebaseUser user;
-    private CollectionReference collectionReference = db.collection("CartItems");
+    private CollectionReference collectionReference ;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
 
+        db = FirebaseFirestore.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
+        collectionReference = db.collection("Products");
 
         user=firebaseAuth.getCurrentUser();
-        Log.d("ItemListActivity", "onCreate: "+ user.getUid());
-
+        progressBar=findViewById(R.id.progressbar);
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //Adding product in productList
+        progressBar.setVisibility(View.VISIBLE);
+        //Adding product in productlist
         productList=new ArrayList<>();
-
-        Product product;
-
-        product = new Product();
-        product.setProductName("Rin Shoap");
-        product.setProductPrice("10");
-        productList.add(product);
-
-        product = new Product();
-        product.setProductName("Handwash");
-        product.setProductPrice("80");
-        productList.add(product);
-
-        product = new Product();
-        product.setProductName("wheat");
-        product.setProductPrice("400");
-        productList.add(product);
-
-        product = new Product();
-        product.setProductName("Shoap");
-        product.setProductPrice("20");
-        productList.add(product);
-
-        product = new Product();
-        product.setProductName("poha");
-        product.setProductPrice("20");
-        productList.add(product);
-
-        product = new Product();
-        product.setProductName("maggie");
-        product.setProductPrice("20");
-        productList.add(product);
-
-        product = new Product();
-        product.setProductName("Shoap");
-        product.setProductPrice("20");
-        productList.add(product);
-
-
-
-        itemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ItemListActivity.this,productList);
-        recyclerView.setAdapter(itemRecyclerViewAdapter);
-
-
-
+        collectionReference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(queryDocumentSnapshots.isEmpty()){
+                            Log.d("ItemListActivity", "onSuccess: unable to fetch data");
+                        }else{
+                            for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
+                                productList.add(snapshot.toObject(Product.class));
+                            }
+                            itemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ItemListActivity.this,productList);
+                            recyclerView.setAdapter(itemRecyclerViewAdapter);
+//                            List<Product> p = queryDocumentSnapshots.toObjects(Product.class);
+//                            productList.addAll(p);
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+        Log.d("Size", "onCreate: "+productList.size());
     }
 
     @Override

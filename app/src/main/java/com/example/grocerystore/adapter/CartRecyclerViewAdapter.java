@@ -119,7 +119,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         }
 
 
-        //Function to remove product from productList
+        //Function to remove product from productlist
 
         private void removeItem(int adapterPosition) {
             Product product = productList.get(adapterPosition);

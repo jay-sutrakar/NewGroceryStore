@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_centerInParent="true"
     android:gravity="center"
     android:padding="10dp"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".CartActivity">
+
+    <LinearLayout
+        android:id="@+id/item_linear_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:padding="10dp"
+        android:orientation="vertical"
+        >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_recyclerview"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-
-
 </LinearLayout>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:text="Buy now"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_height="wrap_content">
+
+    </Button>
+</RelativeLayout>

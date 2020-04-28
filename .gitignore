@@ -12,3 +12,8 @@
 /captures
 .externalNativeBuild
 .cxx
+app/src/main/res/drawable/ic_dashboard_black_24dp.xml
+app/src/main/res/drawable/ic_home_black_24dp.xml
+app/src/main/res/drawable/ic_notifications_black_24dp.xml
+app/src/main/res/menu/bottom_nav_menu.xml
+app/src/main/res/values/dimens.xml
