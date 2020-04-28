@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    android:layout_marginTop="15dp"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="120dp"
+            android:contentDescription="@android:string/untitled"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_gallery">
+
+        </ImageView>
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_margin="6dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/product_name"
+                android:textSize="17sp"
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name">
+
+            </TextView>
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_below="@id/product_name"
+                android:textSize="17sp"
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_price">
+
+            </TextView>
+            <TextView
+                android:id="@+id/product_quantity"
+                android:layout_below="@id/product_price"
+                android:textSize="17sp"
+                android:padding="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quantity">
+            </TextView>
+            <ImageButton
+                android:id="@+id/product_delete"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_delete_black_24dp"
+                android:layout_below="@id/product_quantity"
+                >
+            </ImageButton>
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

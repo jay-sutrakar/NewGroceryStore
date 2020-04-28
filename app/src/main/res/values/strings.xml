@@ -16,4 +16,8 @@
     <string name="quantity">Qty</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="item_added_successfully">Item added Successfully</string>
+    <string name="title_activity_cartt">Cartt</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
