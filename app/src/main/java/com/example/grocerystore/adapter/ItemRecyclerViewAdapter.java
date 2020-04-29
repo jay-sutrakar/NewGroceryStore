@@ -87,28 +87,25 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             Product product = productList.get(getAdapterPosition());
             FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            if(user.getUid() == null) {
-                context.startActivity(new Intent(context,MainActivity.class));
-            }
 
-            CollectionReference collectionReference = db.collection("Cart")
-                    .document(user.getUid()).collection("products");
+            DocumentReference documentReference = db.collection("Cart")
+                    .document(user.getUid()).collection("products").document(product.getProductId());
 
-            collectionReference.add(product)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            progressDialog.dismiss();
-                            addedToCartTextView.setVisibility(View.VISIBLE);
-                            addToCart.setEnabled(false);
-                            Log.d("TAG", "onSuccess: item Added");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+            documentReference.set(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    progressDialog.dismiss();
+                    addedToCartTextView.setVisibility(View.VISIBLE);
+                    addToCart.setEnabled(false);
+                    Log.d("TAG", "onSuccess: item Added");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-                    }
-                });
+                }
+            });
+
         }
     }
 }

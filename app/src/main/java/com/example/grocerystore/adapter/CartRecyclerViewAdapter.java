@@ -16,6 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocerystore.R;
 import com.example.grocerystore.util.Product;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -57,7 +65,9 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         private TextView productPrice;
         private TextView quantity;
         private ImageButton deleteButton;
-
+        private FirebaseFirestore db=FirebaseFirestore.getInstance();
+        private DocumentReference documentReference ;
+        private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         public ViewHolder(@NonNull View itemView,Context context) {
             super(itemView);
@@ -124,8 +134,20 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         private void removeItem(int adapterPosition) {
             Product product = productList.get(adapterPosition);
             productList.remove(product);
-
+            removeFromDatabase(product.getProductId());
             notifyItemRemoved(adapterPosition);
+        }
+
+        private void removeFromDatabase(String productId) {
+            documentReference=db.collection("Cart").document(user.getUid());
+            documentReference.collection("products").document(productId).delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("CartRecyclerViewAdapter", "onSuccess: item succesfully deleted from cart");
+                        }
+                    });
+
         }
     }
 }

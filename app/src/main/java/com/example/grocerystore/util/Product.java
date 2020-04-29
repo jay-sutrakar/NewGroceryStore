@@ -8,10 +8,21 @@ public class Product {
     private String productPrice;
     private String productDiscountPrice;
     private String productBrand;
+    private String productQuantity;
     private Image productImage;
     private String productCategory;
     private String productDescription;
+
     public Product() {
+    }
+
+
+    public String getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(String productQuantity) {
+        this.productQuantity = productQuantity;
     }
 
 

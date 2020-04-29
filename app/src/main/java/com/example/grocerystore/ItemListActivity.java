@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.example.grocerystore.adapter.ItemRecyclerViewAdapter;
 import com.example.grocerystore.util.Product;
+import com.example.grocerystore.util.UserApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -41,6 +42,9 @@ public class ItemListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+
+
+        Log.d("UserApi", "onCreate: "+ UserApi.getInstance().getUserContactNumber());
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();

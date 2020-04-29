@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_centerInParent="true"
     android:gravity="center"
-    android:padding="10dp"
     tools:context=".CartActivity">
 
     <LinearLayout
@@ -27,12 +26,12 @@
 
 </LinearLayout>
     <Button
+        android:id="@+id/placeorder"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:text="Buy now"
+        android:text="Place order"
         android:gravity="center"
         android:textSize="20sp"
         android:layout_height="wrap_content">
-
     </Button>
 </RelativeLayout>

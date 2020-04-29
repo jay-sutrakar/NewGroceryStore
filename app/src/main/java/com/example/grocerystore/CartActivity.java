@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.grocerystore.adapter.CartRecyclerViewAdapter;
 import com.example.grocerystore.util.Product;
@@ -27,7 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
@@ -35,6 +38,7 @@ public class CartActivity extends AppCompatActivity {
     private ProgressDialog progressDialog ;
     private CollectionReference collectionReference;
     private List<Product> productList;
+    private Button placeorder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +47,16 @@ public class CartActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         recyclerView = findViewById(R.id.cart_recyclerview);
+        placeorder = findViewById(R.id.placeorder);
+
         Product product;
         productList = new ArrayList<>();
 
         user = firebaseAuth.getCurrentUser();
-        collectionReference = db.collection("Cart");
 
+        //Fethching data of cart product from database
+
+        collectionReference = db.collection("Cart");
         collectionReference.document(user.getUid()).collection("products")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -78,6 +86,9 @@ public class CartActivity extends AppCompatActivity {
                     }
                 });
 
+        //if user click on place order button
+        placeorder.setOnClickListener(this);
+
     }
 
     @Override
@@ -86,5 +97,14 @@ public class CartActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait ..");
         progressDialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.placeorder:
+                startActivity(new Intent(CartActivity.this,OrderSummary.class));
+                break;
+        }
     }
 }
