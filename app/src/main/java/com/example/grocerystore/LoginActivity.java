@@ -9,16 +9,20 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocerystore.prevalent.Prevalent;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText email;
@@ -27,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private FirebaseAuth firebaseAuth;
     private TextView createNewAccount;
+    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.login_button);
         loadingBar = new ProgressDialog(this);
         createNewAccount = (TextView) findViewById(R.id.login_register);
+        checkBox = (CheckBox) findViewById(R.id.login_remember_me_checkbox);
+        Paper.init(this);
 
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +80,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getVerified(String useremail, String userpassword) {
+        if (checkBox.isChecked()) {
+            Paper.book().write(Prevalent.customerEmail, useremail);
+            Paper.book().write(Prevalent.customerPassword, userpassword);
+        }
+
         firebaseAuth.signInWithEmailAndPassword(useremail,userpassword)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
