@@ -1,6 +1,6 @@
 package com.example.grocerystore.util;
 
-class UserAddress {
+public class UserAddress {
     private String country;
     private String state;
     private String city;
@@ -73,7 +73,6 @@ class UserAddress {
     public void setLandmark(String landmark) {
         this.landmark = landmark;
     }
-
 
 
 }

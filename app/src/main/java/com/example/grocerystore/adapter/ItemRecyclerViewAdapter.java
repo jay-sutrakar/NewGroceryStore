@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,15 +29,19 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder> {
+public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder> implements Filterable {
     private Context context;
     private List<Product> productList;
+    private List<Product> productListAll;
 
     public ItemRecyclerViewAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        this.productListAll = new ArrayList<>(productList);
     }
 
     @NonNull
@@ -47,8 +53,8 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull ItemRecyclerViewAdapter.ViewHolder holder, int position) {
-        Product product=productList.get(position);
-        Log.d("TAG", "onBindViewHolder: "+product.getProductName());
+        Product product = productList.get(position);
+        Log.d("TAG", "onBindViewHolder: " + product.getProductName());
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getProductPrice());
         holder.quantity.setText("1");
@@ -58,6 +64,38 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     public int getItemCount() {
         return productList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Product> filteredProducts = new ArrayList<>();
+            if (constraint.toString().isEmpty()) {
+                filteredProducts.addAll(productListAll);
+            } else {
+                for (Product product: productListAll) {
+                    if (product.getProductName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        filteredProducts.add(product);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredProducts;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            productList.clear();
+            productList.addAll((Collection<? extends Product>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView productName;
@@ -106,6 +144,24 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 }
             });
 
+            CollectionReference collectionReference;
+            collectionReference = db.collection("Cart").document(user.getUid()).collection("products");
+
+            collectionReference.add(product)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            progressDialog.dismiss();
+                            addedToCartTextView.setVisibility(View.VISIBLE);
+                            addToCart.setEnabled(false);
+                            Log.d("TAG", "onSuccess: item Added");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
         }
     }
 }
