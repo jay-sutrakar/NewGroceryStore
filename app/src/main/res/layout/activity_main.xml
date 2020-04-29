@@ -57,7 +57,8 @@
         android:textSize="18sp"
         android:text="@string/already_have_an_account_login"
         android:textColor="@android:color/white"
-        android:background="@drawable/buttons">
+        android:background="@drawable/buttons"
+        >
 
     </Button>
 

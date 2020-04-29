@@ -64,7 +64,7 @@
         android:id="@+id/login_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Create here"
+        android:text="Or create new account"
         android:layout_below="@+id/login_button"
         android:layout_marginTop="6dp"
         android:layout_marginLeft="15dp"
@@ -72,6 +72,19 @@
         android:textSize="17sp"
         android:textColor="@color/colorPrimaryDark"
         >
-
     </TextView>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/login_remember_me_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember Me"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/login_button"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="17dp">
+    </androidx.appcompat.widget.AppCompatCheckBox>
 </RelativeLayout>

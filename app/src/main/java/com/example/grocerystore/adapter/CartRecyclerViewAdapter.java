@@ -48,7 +48,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product=productList.get(position);
-        Log.d("CartRecyclerViewAdapter", "onBindViewHolder: "+product.getProductName());
+        Log.d("CartRecyclerViewAdapter", "onBindViewHolder: " + product.getProductName());
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(product.getProductPrice());
         holder.quantity.setText("1");
@@ -87,7 +87,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
             // Switch case is use to work for all click events in viewholder
 
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.product_delete :
                     builder = new AlertDialog.Builder(context);
 

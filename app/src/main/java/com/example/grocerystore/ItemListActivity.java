@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.example.grocerystore.adapter.ItemRecyclerViewAdapter;
 import com.example.grocerystore.util.Product;
@@ -29,15 +31,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class ItemListActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private RecyclerView recyclerView;
     private ItemRecyclerViewAdapter itemRecyclerViewAdapter;
-    private List<Product> productList;
+    private ArrayList<Product> productList;
     private FirebaseFirestore db;
     private FirebaseUser user;
     private CollectionReference collectionReference ;
     private ProgressBar progressBar;
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,25 +56,28 @@ public class ItemListActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         collectionReference = db.collection("Products");
 
-        user=firebaseAuth.getCurrentUser();
-        progressBar=findViewById(R.id.progressbar);
-        recyclerView=findViewById(R.id.recyclerView);
+        user = firebaseAuth.getCurrentUser();
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar.setVisibility(View.VISIBLE);
+        searchView = (SearchView) findViewById(R.id.search_button);
+
+
         //Adding product in productlist
-        productList=new ArrayList<>();
+        productList = new ArrayList<>();
         collectionReference.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(queryDocumentSnapshots.isEmpty()){
+                        if (queryDocumentSnapshots.isEmpty()){
                             Log.d("ItemListActivity", "onSuccess: unable to fetch data");
-                        }else{
-                            for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
+                        } else {
+                            for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
                                 productList.add(snapshot.toObject(Product.class));
                             }
-                            itemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ItemListActivity.this,productList);
+                            itemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ItemListActivity.this, productList);
                             recyclerView.setAdapter(itemRecyclerViewAdapter);
 //                            List<Product> p = queryDocumentSnapshots.toObjects(Product.class);
 //                            productList.addAll(p);
@@ -81,20 +90,38 @@ public class ItemListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.cart_menu:
-                startActivity(new Intent(ItemListActivity.this,CartActivity.class));
+            case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
                 break;
-            case R.id.sign_out:
-                firebaseAuth.signOut();
-                startActivity(new Intent(ItemListActivity.this,MainActivity.class));
+
+            case R.id.sign_out: firebaseAuth.signOut();
+                Paper.book().destroy();
+                startActivity(new Intent(ItemListActivity.this, MainActivity.class));
                 finish();
+                break;
+
+            case R.id.search_button:
+                searchView = (SearchView) item.getActionView();
+                searchView.setQueryHint("Search");
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        itemRecyclerViewAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
                 break;
         }
         return super.onOptionsItemSelected(item);
