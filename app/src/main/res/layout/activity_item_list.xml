@@ -26,7 +26,6 @@
         </androidx.appcompat.widget.Toolbar>
         <ProgressBar
             android:id="@+id/progressbar"
-            android:layout_gravity="center"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -45,12 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-    <!--    <android.support.design.widget.NavigationView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="math_parent"-->
-    <!--        android:layout_gravity="start">-->
-    <!--        Depricated  Now  -->
-    <!--    </android.support.design.widget.NavigationView>-->
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -62,27 +56,3 @@
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
 
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:orientation="vertical"-->
-<!--    android:layout_margin="10dp"-->
-<!--    android:gravity="center"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".ItemListActivity">-->
-
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressbar"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content">-->
-<!--    </ProgressBar>-->
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerView"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        >-->
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
-<!--</LinearLayout>-->
