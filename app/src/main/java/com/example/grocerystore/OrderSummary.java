@@ -52,10 +52,10 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         collectionReference = db.collection("Cart").document(user.getUid()).collection("products");
 
         //Intialize views
-        recyclerView = findViewById(R.id.order_summary_recycleview);
-        progressBar = findViewById(R.id.progressbar);
-        amountText = findViewById(R.id.amount);
-        paymentButton = findViewById(R.id.payment_button);
+        recyclerView = (RecyclerView) findViewById(R.id.order_summary_recycleview);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        amountText = (TextView) findViewById(R.id.amount);
+        paymentButton = (Button) findViewById(R.id.payment_button);
         
         productList = new ArrayList<>();
 
@@ -65,13 +65,13 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(queryDocumentSnapshots.isEmpty()){
+                if (queryDocumentSnapshots.isEmpty()) {
                     Log.d("ListEmpty", "onSuccess: Empty");
                     Toast.makeText(OrderSummary.this,"Add Some item to Cart ",Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.INVISIBLE);
 
-                }else{
-                    List<Product> p=queryDocumentSnapshots.toObjects(Product.class);
+                } else {
+                    List<Product> p = queryDocumentSnapshots.toObjects(Product.class);
                     productList.addAll(p);
                     Log.d("size", "onSuccess: "+productList.size());
                     //Here we will call the Recycler view Adapter
@@ -80,8 +80,8 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
                     adapter = new OrderSummaryRecyclerView(OrderSummary.this, productList);
                     recyclerView.setAdapter(adapter);
                     double totalAmount=0;
-                    for(Product pr : p){
-                        totalAmount=totalAmount+Double.parseDouble(pr.getProductDiscountPrice());
+                    for (Product product: p) {
+                        totalAmount = totalAmount + Double.parseDouble(product.getProductDiscountPrice());
                     }
                     amountText.setText(String.valueOf(totalAmount));
                     progressBar.setVisibility(View.INVISIBLE);
@@ -101,8 +101,8 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    public void onClick (View v) {
+        switch (v.getId()) {
             case R.id.payment_button:
                 openAddressDialog();
                 break;
