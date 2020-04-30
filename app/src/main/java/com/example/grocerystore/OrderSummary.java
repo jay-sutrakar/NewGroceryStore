@@ -14,10 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystore.adapter.OrderSummaryRecyclerView;
-import com.example.grocerystore.util.AddNewAddressDialog;
 import com.example.grocerystore.util.AddressDialog;
 import com.example.grocerystore.util.Product;
-import com.example.grocerystore.util.UserAddress;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderSummary extends AppCompatActivity implements View.OnClickListener, AddNewAddressDialog.AddNewAddressDialogListener {
+public class OrderSummary extends AppCompatActivity implements View.OnClickListener {
     private FirebaseFirestore db;
     private FirebaseUser user;
     private CollectionReference collectionReference;
@@ -114,8 +112,4 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         addressDialog.show(getSupportFragmentManager(),"AddressDialog");
     }
 
-    @Override
-    public void addNewAddress(UserAddress userAddress) {
-
-    }
 }
