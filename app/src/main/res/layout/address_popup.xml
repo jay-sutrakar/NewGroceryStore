@@ -20,6 +20,13 @@
         android:layout_height="wrap_content">
 
     </TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addressRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+    </androidx.recyclerview.widget.RecyclerView>
+
     <Button
         android:id="@+id/add_address_button"
         android:layout_alignParentBottom="true"
