@@ -64,7 +64,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         private ProgressDialog progressDialog;
         private TextView productPrice;
         private TextView quantity;
-        private ImageButton deleteButton;
+        private Button deleteButton;
         private FirebaseFirestore db=FirebaseFirestore.getInstance();
         private DocumentReference documentReference ;
         private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

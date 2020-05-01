@@ -8,9 +8,9 @@
     android:gravity="center"
     tools:context=".CartActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/item_linear_layout"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:gravity="center"
         android:padding="10dp"
@@ -20,18 +20,32 @@
         android:id="@+id/cart_recyclerview"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/placeorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
 
-</LinearLayout>
-    <Button
-        android:id="@+id/placeorder"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:text="Place order"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_height="wrap_content">
-    </Button>
+            android:text="Place order"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp">
+
+        </com.google.android.material.button.MaterialButton>
+
+    </RelativeLayout>
+<!--    <Button-->
+<!--        android:id="@+id/placeorder"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:text="Place order"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="20sp"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </Button>-->
+
 </RelativeLayout>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    android:layout_marginTop="15dp"
-    android:layout_margin="5dp">
+    app:cardElevation="13dp"
+    app:strokeWidth="2dp"
+    android:layout_margin="2dp"
+    app:strokeColor="@color/colorPrimaryDark"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
     <LinearLayout
         android:orientation="horizontal"
         android:padding="5dp"
@@ -21,7 +21,6 @@
             android:contentDescription="@android:string/untitled"
             android:layout_height="match_parent"
             android:src="@android:drawable/ic_menu_gallery">
-
         </ImageView>
         <RelativeLayout
             android:orientation="vertical"
@@ -38,16 +37,17 @@
                 android:text="@string/product_name">
 
             </TextView>
-            <TextView
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/product_price"
+                android:text="@string/product_price"
                 android:layout_below="@id/product_name"
                 android:textSize="17sp"
                 android:padding="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/product_price">
+                android:layout_height="wrap_content">
 
-            </TextView>
+            </com.google.android.material.textview.MaterialTextView>
             <TextView
                 android:id="@+id/product_quantity"
                 android:layout_below="@id/product_price"
@@ -57,17 +57,20 @@
                 android:layout_height="wrap_content"
                 android:text="@string/quantity">
             </TextView>
-            <ImageButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/product_delete"
-                android:layout_width="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_delete_black_24dp"
+                android:text="Remove"
+                app:backgroundTint="@color/deep_orange_600"
+                app:icon="@drawable/ic_delete_black_24dp"
+
+                app:iconGravity="textStart"
                 android:layout_below="@id/product_quantity"
                 >
-            </ImageButton>
+            </com.google.android.material.button.MaterialButton>
+
         </RelativeLayout>
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

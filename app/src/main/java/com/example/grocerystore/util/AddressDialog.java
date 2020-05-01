@@ -4,13 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +39,23 @@ public class AddressDialog extends AppCompatDialogFragment {
     private AddressRecycleViewAdapter addressRecycleViewAdapter;
     private List<UserAddress> userAddressList;
     private UserAddress userAddress;
+    private AddressDialogListener listener;
+
+
+    public interface AddressDialogListener{
+        void OnAddressSelection(UserAddress userAddress);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (AddressDialogListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(e+"Must Implement AddressDialogListner ");
+        }
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -93,7 +110,7 @@ public class AddressDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    public void addNewAddress(UserAddress userAddress) {
+    public void addNewAddress(final UserAddress userAddress) {
         userAddressList.add(userAddress);
         if(userAddressList.size()>0){
 
@@ -103,7 +120,8 @@ public class AddressDialog extends AppCompatDialogFragment {
                 @Override
                 public void OnItemClicked(UserAddress address) {
                     Log.d("itemSelected ", "OnItemClicked: "+address.getName());
-                    dismiss();
+                     listener.OnAddressSelection(userAddress);
+                     dismiss();
                 }
             });
             recyclerView.setAdapter(addressRecycleViewAdapter);

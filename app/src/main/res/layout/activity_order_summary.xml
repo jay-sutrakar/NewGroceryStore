@@ -46,14 +46,36 @@
             android:textSize="25sp"
             android:layout_height="wrap_content">
         </TextView>
+
+        <TextView
+            android:id="@+id/change_address_textview"
+            android:layout_width="wrap_content"
+            android:text="change address"
+            android:layout_alignBottom="@id/amount"
+            android:layout_marginRight="5dp"
+            android:layout_toStartOf="@id/payment_button"
+            android:visibility="gone"
+            android:layout_height="wrap_content" />
         <Button
 
             android:layout_alignParentEnd="true"
             android:id="@+id/payment_button"
-            android:textSize="30dp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Payment"
+            android:visibility="visible"
             />
+        <Button
+
+            android:layout_alignParentEnd="true"
+            android:id="@+id/change_address_button"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Select Address"
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 </RelativeLayout>
