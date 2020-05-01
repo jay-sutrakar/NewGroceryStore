@@ -116,12 +116,6 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
             case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
                 break;
 
-            case R.id.sign_out: firebaseAuth.signOut();
-                Paper.book().destroy();
-                startActivity(new Intent(ItemListActivity.this, MainActivity.class));
-                finish();
-                break;
-
             case R.id.search_button:
                 searchView = (SearchView) item.getActionView();
                 searchView.setQueryHint("Search");
@@ -147,6 +141,17 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             //Here you will write code for different navigation options
+            case R.id.nav_sign_out:
+                firebaseAuth.signOut();
+                Paper.book().destroy();
+                startActivity(new Intent(ItemListActivity.this, MainActivity.class));
+                finish();
+                break;
+
+            case R.id.nav_Profile:
+                startActivity(new Intent(ItemListActivity.this, UserProfileActivity.class));
+                break;
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

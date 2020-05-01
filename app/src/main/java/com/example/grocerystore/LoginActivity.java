@@ -11,10 +11,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocerystore.prevalent.Prevalent;
 import com.example.grocerystore.util.UserApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +32,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import io.paperdb.Paper;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText email;
     private EditText password;
@@ -39,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView createNewAccount;
     private FirebaseFirestore db;
     private CollectionReference collectionReference;
+    private CheckBox rememberMeCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.login_button);
         loadingBar = new ProgressDialog(this);
         createNewAccount = (TextView) findViewById(R.id.login_register);
+        rememberMeCheckBox = (CheckBox) findViewById(R.id.login_remember_me_checkbox);
 
         db = FirebaseFirestore.getInstance();
         collectionReference = db.collection("Customers");
@@ -80,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     getVerified(useremail, userpassword);
                 } else {
                     loadingBar.dismiss();
-                    Toast.makeText(LoginActivity.this, "Fields Should be Empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Fields Should not be Empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -88,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getVerified(String useremail, String userpassword) {
+        if (rememberMeCheckBox.isChecked()) {
+            Paper.book().write(Prevalent.customerEmail, useremail);
+            Paper.book().write(Prevalent.customerPassword, userpassword);
+        }
+
         firebaseAuth.signInWithEmailAndPassword(useremail,userpassword)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override

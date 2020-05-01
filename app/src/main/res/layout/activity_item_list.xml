@@ -24,6 +24,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         </androidx.appcompat.widget.Toolbar>
+
         <ProgressBar
             android:id="@+id/progressbar"
             android:layout_gravity="center"
