@@ -14,6 +14,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.grocerystore.util.UserAddress;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
@@ -55,6 +56,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,7 +109,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final String TAG = MapActivity.class.getSimpleName();
     private GoogleMap mMap;
     private CameraPosition mCameraPosition;
-
+    private Marker origin;
     // The entry point to the Places API.
     private PlacesClient mPlacesClient;
 
@@ -144,7 +147,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private TextView cityname;
     private TextView addressSnippet;
     private Button setAsLocation;
-    private BottomSheetBehavior bottomSheetBehavior;
+    private TextView loadingTextView;
+    private ProgressBar progressBar;
+    private RelativeLayout relativeLayout;
+
+    //Used to save the detail of user Address
+    private UserAddress userAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,8 +176,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         cityname = findViewById(R.id.cityname);
         addressSnippet = findViewById(R.id.address_snippet);
         setAsLocation = findViewById(R.id.set_as_location);
-        FrameLayout bottomSheet = findViewById(R.id.standardBottomSheet);
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        relativeLayout = findViewById(R.id.relativeLayout);
+        loadingTextView = findViewById(R.id.loadingText);
+        progressBar = findViewById(R.id.bottom_sheet_progressbar);
+
+
+        setAsLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapActivity.this,MainActivity.class));
+                finish();
+            }
+        });
 
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -290,6 +308,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Log.d(TAG, "onSuccess: "+place.getName());
                         if(place.getLatLng() != null ){
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng,DEFAULT_ZOOM));
+                            setUpBottomSheet(newLatLng.latitude,newLatLng.longitude);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -309,6 +328,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     }
+
     /**
      * Saves the state of the map when the activity is paused.
      */
@@ -352,6 +372,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
+
+
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+
+                setAsLocation.setActivated(false);
+                relativeLayout.setVisibility(View.INVISIBLE);
+                loadingTextView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                LatLng latLng = new LatLng(mMap.getCameraPosition().target.latitude,mMap.getCameraPosition().target.longitude);
+                origin = mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .draggable(false)
+                .visible(false));
+                setUpBottomSheet(latLng.latitude,latLng.longitude);
+
+            }
+        });
 
         // Use a custom info window adapter to handle multiple lines of text in the
         // info window contents.
@@ -410,8 +454,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(mLastKnownLocation.getLatitude(),
                                                 mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-
-                                setUpBottomSheet();
+                                origin = mMap.addMarker(new MarkerOptions()
+                                        .draggable(false)
+                                        .visible(false)
+                                        .position(new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude())));
+                                setUpBottomSheet(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
                             }else{
                                 final LocationRequest locationRequest = LocationRequest.create();
                                 locationRequest.setInterval(10000);
@@ -704,41 +751,33 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-    private void setUpBottomSheet() {
+    private void setUpBottomSheet(double latitude, double longitude) {
         if(mLastKnownLocation != null){
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             try {
-                List<Address> addresses = geocoder.getFromLocation(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), 1);
+                List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                 Address obj = addresses.get(0);
                 String add = obj.getAddressLine(0);
+                userAddress.getInstance().setAddressline(add);
+                userAddress.getInstance().setPinCode(obj.getPostalCode());
+                userAddress.getInstance().setCity(obj.getLocality());
+                userAddress.getInstance().setLandmark(obj.getPremises());
 
                 cityname.setText(obj.getLocality());
                 addressSnippet.setText(add);
 
                 Log.v("IGA", "Address" + add);
-                // Toast.makeText(this, "Address=>" + add,
-                // Toast.LENGTH_SHORT).show();
-
-                // TennisAppActivity.showDialog(add);
+                relativeLayout.setVisibility(View.VISIBLE);
+                loadingTextView.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
+                setAsLocation.setActivated(true);
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
-    private void setBottomSheet(){
-        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
-    }
 
     @Override
     protected void onStart() {

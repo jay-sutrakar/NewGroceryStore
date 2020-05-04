@@ -1,5 +1,7 @@
 package com.example.grocerystore.util;
 
+import com.google.firebase.firestore.auth.User;
+
 public class UserAddress {
     private String country;
     private String state;
@@ -9,7 +11,13 @@ public class UserAddress {
     private String name;
     private String phonenumber;
     private String addressline;
+    private static UserAddress instance;
 
+    public static UserAddress getInstance(){
+        if(instance == null)
+            instance = new UserAddress();
+        return instance;
+    }
     public String getName() {
         return name;
     }
