@@ -130,4 +130,19 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         paymentButton.setVisibility(View.VISIBLE);
         selectAddressTextview.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,ItemListActivity.class));
+        finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        selectAddress.setVisibility(View.VISIBLE);
+        paymentButton.setVisibility(View.INVISIBLE);
+
+    }
 }

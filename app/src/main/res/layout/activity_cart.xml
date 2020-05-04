@@ -13,30 +13,29 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:padding="10dp"
+
         android:orientation="vertical"
         >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_recyclerview"
         android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
+        android:layout_above="@id/placeorder"
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/placeorder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:gravity="center"
 
-            android:text="Place order"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp">
-
-        </com.google.android.material.button.MaterialButton>
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/placeorder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:alpha="0.75"
+                android:text="Place order"
+                android:layout_alignParentBottom="true"
+                android:textSize="20sp">
+            </com.google.android.material.button.MaterialButton>
     </RelativeLayout>
 <!--    <Button-->
 <!--        android:id="@+id/placeorder"-->

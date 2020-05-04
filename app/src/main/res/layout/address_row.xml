@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/deleverto"
-        android:text="Delevery to:"
-        android:textStyle="bold"
-        android:textSize="18sp"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:checkable="true"
+    android:focusable="true">
+
+    <RelativeLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </TextView>
-    <TextView
-        android:id="@+id/delveryname"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/deleverto"
-        android:text="Name ">
-    </TextView>
+        <TextView
+            android:id="@+id/deleverto"
+            android:text="Delevery to:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:id="@+id/delveryname"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deleverto"
+            android:text="Name ">
+        </TextView>
 
-    <TextView
-        android:id="@+id/deleveryZipcode"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/deleverto"
-        android:layout_toRightOf="@id/delveryname"
-        android:text="ZipCode"></TextView>
-    <TextView
-        android:id="@+id/addressdescription"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/delveryname"
-        android:text="AddressDescription">
-    </TextView>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/deleveryZipcode"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/deleverto"
+            android:layout_toRightOf="@id/delveryname"
+            android:text="ZipCode"></TextView>
+        <TextView
+            android:id="@+id/addressdescription"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/delveryname"
+            android:text="AddressDescription">
+        </TextView>
+
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

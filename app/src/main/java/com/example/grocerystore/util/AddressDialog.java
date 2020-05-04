@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,6 +73,7 @@ public class AddressDialog extends AppCompatDialogFragment {
         addNewAddressButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //Opening another dialog for Address filling
                 AlertDialog.Builder newbuilder = new AlertDialog.Builder(context);
                 LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -82,13 +85,13 @@ public class AddressDialog extends AppCompatDialogFragment {
                 state = view.findViewById(R.id.state);
                 zipcode = view.findViewById(R.id.zipcode);
                 phonenumber = view.findViewById(R.id.phoneNumber);
+                saveAddress = view.findViewById(R.id.save_address);
 
-                newbuilder.setView(view).
-                        setPositiveButton("SAVE ", new DialogInterface.OnClickListener() {
+                newbuilder.setView(view)
+
+                        .setPositiveButton("SAVE ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-
                         //Creating useraddress object to store the detail of user address
                         userAddress = new UserAddress();
                         userAddress.setName(name.getText().toString().trim());
@@ -98,7 +101,16 @@ public class AddressDialog extends AppCompatDialogFragment {
                         userAddress.setState(state.getText().toString().trim());
                         userAddress.setPinCode(zipcode.getText().toString().trim());
                         userAddress.setPhonenumber(phonenumber.getText().toString().trim());
-                        addNewAddress(userAddress);
+                        if( TextUtils.isEmpty(name.getText()) && TextUtils.isEmpty(address.getText())
+                                && TextUtils.isEmpty(name.getText()) && TextUtils.isEmpty(city.getText())
+                                && TextUtils.isEmpty(state.getText()) && TextUtils.isEmpty(zipcode.getText())
+                                && TextUtils.isEmpty(phonenumber.getText())){
+                            name.setError("name is mandatory ");
+                            return;
+
+                        }else {
+                            addNewAddress(userAddress);
+                        }
                     }
                 });
                  newbuilder.create().show();
