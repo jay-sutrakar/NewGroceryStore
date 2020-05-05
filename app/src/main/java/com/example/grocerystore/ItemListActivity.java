@@ -2,6 +2,7 @@ package com.example.grocerystore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +18,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.grocerystore.adapter.ItemRecyclerViewAdapter;
 import com.example.grocerystore.util.Product;
 import com.example.grocerystore.util.UserApi;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -60,15 +65,15 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
         drawer = findViewById(R.id.draw_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer, toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
 
-        Log.d("UserApi", "onCreate: "+ UserApi.getInstance().getUserContactNumber());
+        Log.d("UserApi", "onCreate: " + UserApi.getInstance().getUserContactNumber());
 
         db = FirebaseFirestore.getInstance();
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         collectionReference = db.collection("Products");
 
         user = firebaseAuth.getCurrentUser();
@@ -152,6 +157,51 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
                 startActivity(new Intent(ItemListActivity.this, UserProfileActivity.class));
                 break;
 
+
+            case R.id.nav_delete_my_account:
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                final EditText verifyPassword = new EditText(this);
+                alertDialog.setTitle("Deleting Account...");
+                alertDialog.setMessage("Are you sure?");
+
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AlertDialog.Builder verifyPasswordDialog = new AlertDialog.Builder(alertDialog.getContext());
+                        verifyPasswordDialog.setTitle("Deleting Account...");
+                        verifyPasswordDialog.setMessage("Please Enter your password to confirm...");
+                        verifyPasswordDialog.setView(verifyPassword);
+
+                        verifyPasswordDialog.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                db.collection("Customers").document(user.getUid()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(ItemListActivity.this, "Account deleted successfully", Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(ItemListActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("Delete Account", "Failed with exception: " + e.toString());
+                                        Toast.makeText(ItemListActivity.this, "Failed...", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
