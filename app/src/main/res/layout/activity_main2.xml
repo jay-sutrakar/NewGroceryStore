@@ -22,34 +22,38 @@ tools:openDrawer="start">
         android:elevation="6dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/locationRelativLayout"
+            android:clickable="true"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/locationLogo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_place_black_50dp">
-            </ImageView>
-            <TextView
-                android:id="@+id/location"
-                android:text="Your Location"
-                android:layout_toRightOf="@id/locationLogo"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_place_black_50dp"></ImageView>
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/addressLine"
-                android:text="AddressLine"
-                android:layout_toRightOf="@id/locationLogo"
+                <TextView
+                    android:id="@+id/location"
+                    android:text="Your Location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/addressLine"
+                    android:text="AddressLine"
+                    android:layout_below="@id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                android:layout_below="@id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                </TextView>
+            </RelativeLayout>
 
-            </TextView>
-        </RelativeLayout>
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 

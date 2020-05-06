@@ -29,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderSummary extends AppCompatActivity implements View.OnClickListener, AddressDialog.AddressDialogListener {
+public class OrderSummary extends AppCompatActivity implements View.OnClickListener {
     private FirebaseFirestore db;
     private FirebaseUser user;
     private CollectionReference collectionReference;
@@ -42,6 +42,10 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     private TextView selectAddressTextview;
     private Button paymentButton;
     private Button selectAddress;
+    private Button changeAddress;
+    private TextView deleveryLocation;
+    private TextView deleveryAddressline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +62,13 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         amountText = findViewById(R.id.amount);
         paymentButton = findViewById(R.id.payment_button);
         selectAddress = findViewById(R.id.change_address_button);
-        selectAddressTextview = findViewById(R.id.change_address_textview);
-        productList = new ArrayList<>();
+        changeAddress = findViewById(R.id.change_address_button);
+        deleveryAddressline = findViewById(R.id.addressLine);
+        deleveryLocation = findViewById(R.id.location);
 
+        productList = new ArrayList<>();
+        deleveryLocation.setText(UserAddress.getInstance().getCity());
+        deleveryAddressline.setText(UserAddress.getInstance().getAddressline());
 
 
         //Fetching data from Cart collection of Firestore
@@ -98,8 +106,7 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         });
 
         paymentButton.setOnClickListener(this);
-        selectAddress.setOnClickListener(this);
-        selectAddressTextview.setOnClickListener(this);
+        changeAddress.setOnClickListener(this);
 
     }
 
@@ -107,42 +114,25 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.change_address_button:
-                openAddressDialog();
-                break;
-            case R.id.change_address_textview:
-                openAddressDialog();
-                break;
             case R.id.payment_button:
                 startActivity(new Intent(OrderSummary.this,PaymentActivity.class));
                 break;
+            case R.id.change_address_button:
+                startActivity(new Intent(OrderSummary.this,MapActivity.class));
+                break;
         }
-    }
-
-    private void openAddressDialog() {
-        AddressDialog addressDialog = new AddressDialog();
-        addressDialog.show(getSupportFragmentManager(),"AddressDialog");
-    }
-
-    @Override
-    public void OnAddressSelection(UserAddress userAddress) {
-        selectAddress.setVisibility(View.INVISIBLE);
-        paymentButton.setVisibility(View.VISIBLE);
-        selectAddressTextview.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this,ItemListActivity.class));
+        startActivity(new Intent(this,MainActivity2.class));
         finish();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        selectAddress.setVisibility(View.VISIBLE);
-        paymentButton.setVisibility(View.INVISIBLE);
 
     }
 }

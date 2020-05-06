@@ -38,6 +38,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13'
     implementation 'io.paperdb:paperdb:2.6'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2-beta01'

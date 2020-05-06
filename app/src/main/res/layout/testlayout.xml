@@ -1,102 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.google.android.material.card.MaterialCardView
-xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/card"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="13dp"
-    app:strokeWidth="2dp"
-    android:layout_margin="2dp"
-    app:strokeColor="@color/colorPrimaryDark"
     xmlns:tools="http://schemas.android.com/tools"
-    >
-<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/product_image"
-        android:layout_width="120dp"
-        android:contentDescription="@android:string/untitled"
-        android:layout_height="match_parent"
-        android:src="@android:drawable/ic_menu_gallery">
-    </ImageView>
-
-    <RelativeLayout
+    android:gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    >
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_email_input"
+        android:hint="User name"
+        app:startIconDrawable="@drawable/ic_person_outline_white_24dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="7dp">
+        android:layout_height="wrap_content">
 
-        <!-- Title, secondary and supporting text -->
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product Name "
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            />
-        <TextView
-            android:id="@+id/product_brand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Brand"
-            android:textSize="13sp"
-            android:layout_below="@id/product_name"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
-            />
-        <TextView
-            android:layout_below="@id/product_brand"
-            android:text="Qty V"
-            android:layout_marginTop="8dp"
-            android:textSize="15sp"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:id="@+id/product_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="15sp"
-            android:layout_marginRight="15dp"
-            android:layout_alignParentEnd="true"
-            android:text="Price"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
-            />
-        <TextView
-            android:id="@+id/product_discount_price"
-            android:layout_below="@id/product_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:layout_marginRight="15dp"
-            android:layout_alignParentEnd="true"
-            android:text="Price"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
-            />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/product_remove"
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Remove"
-            app:backgroundTint="@color/deep_orange_600"
-            app:icon="@drawable/ic_delete_black_24dp"
+            android:layout_height="wrap_content">
 
-            app:iconGravity="textStart"
-            android:layout_below="@id/product_discount_price"
-            >
-        </com.google.android.material.button.MaterialButton>
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </RelativeLayout>
-</LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_password_input"
+        android:layout_below="@+id/login_email_input"
+        android:hint="Password"
+        app:startIconDrawable="@drawable/ic_person_outline_white_24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <!--    <EditText-->
+<!--        android:id="@+id/login_email_input"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        android:hint="@string/email"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="17sp"-->
+<!--        android:textColorHint="@color/colorPrimaryDark"-->
+<!--        android:layout_marginLeft="15sp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:padding="20dp"-->
+<!--        android:importantForAutofill="no"-->
+<!--        android:background="@drawable/input_design">-->
+<!--    </EditText>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/login_password_input"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:layout_below="@id/login_email_input"-->
+<!--        android:layout_marginTop="6dp"-->
+<!--        android:padding="20dp"-->
+<!--        android:hint="@string/password"-->
+<!--        android:textSize="17sp"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:textColorHint="@color/colorPrimaryDark"-->
+<!--        android:background="@drawable/input_design"-->
+<!--        android:importantForAutofill="no">-->
+<!--    </EditText>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/login_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/login"-->
+<!--        android:layout_below="@id/login_password_input"-->
+<!--        android:layout_marginTop="6dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:background="@drawable/buttons"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textSize="17sp"-->
+<!--        android:padding="20dp"-->
+<!--        >-->
+<!--    </Button>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/login_register"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Or create new account"-->
+<!--        android:layout_below="@+id/login_button"-->
+<!--        android:layout_marginTop="6dp"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:textSize="17sp"-->
+<!--        android:textColor="@color/colorPrimaryDark"-->
+<!--        >-->
+<!--    </TextView>-->
+
+<!--    <androidx.appcompat.widget.AppCompatCheckBox-->
+<!--        android:id="@+id/login_remember_me_checkbox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Remember Me"-->
+<!--        android:textColor="@color/colorPrimaryDark"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:layout_below="@+id/login_button"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginRight="17dp">-->
+<!--    </androidx.appcompat.widget.AppCompatCheckBox>-->
+</RelativeLayout>

@@ -5,7 +5,7 @@ import com.google.firebase.firestore.auth.User;
 public class UserAddress {
     private String country;
     private String state;
-    private String city;
+    private String city = "Not found";
     private String pinCode;
     private String landmark;
     private String name;

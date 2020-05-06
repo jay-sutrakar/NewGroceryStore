@@ -11,13 +11,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +52,25 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     private TextView locationName;
     private TextView addressLine;
     private List<String> availableInCity;
-
+    private LinearLayout linearlayout;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        //Using shared preference to get user location data
+        sharedPreferences = getSharedPreferences("User_address_data", Context.MODE_PRIVATE);
 
         locationName = findViewById(R.id.location);
         addressLine = findViewById(R.id.addressLine);
+        linearlayout = findViewById(R.id.locationRelativLayout);
 
+        linearlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity2.this,MapActivity.class));
+            }
+        });
         //City in which our service is available
         availableInCity = new ArrayList<>();
         availableInCity.add("Tikamgarh");
@@ -100,7 +116,8 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                         case R.id.nav_cart:
                             openFragment(Cart_fragment.newInstance("",""));
                             break;
-                        case R.id.nav_search:
+                        case R.id.nav_notification:
+                            openFragment(Notification_fragment.newInstance("",""));
                             break;
                         case R.id.nav_account:
                             openFragment(Profile_fragment.newInstance("",""));
@@ -189,7 +206,14 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onStart() {
         super.onStart();
-        locationName.setText(UserAddress.getInstance().getCity());
-        addressLine.setText(UserAddress.getInstance().getAddressline());
+        if(sharedPreferences.contains("City") && sharedPreferences.contains("Addressline")) {
+            UserAddress.getInstance().setCity(sharedPreferences.getString("City",null));
+            UserAddress.getInstance().setAddressline(sharedPreferences.getString("Addressline",null));
+            locationName.setText(UserAddress.getInstance().getCity());
+            addressLine.setText(UserAddress.getInstance().getAddressline());
+        }else{
+            startActivity(new Intent(MainActivity2.this,MapActivity.class));
+            finish();
+        }
     }
 }

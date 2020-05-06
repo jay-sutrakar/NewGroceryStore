@@ -6,6 +6,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderSummary">
+    <com.google.android.material.card.MaterialCardView
+        android:clickable="true"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:id="@+id/address_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/deleverto"
+                android:text="Delever to : "
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <Button
+                android:id="@+id/change_address_button"
+                android:clickable="true"
+                android:layout_marginLeft="10dp"
+                android:text="Change"
+                android:background="@android:color/transparent"
+                android:textSize="20sp"
+                android:textColor="@color/searchBarClearIconTintColorDark"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </Button>
+            <TextView
+                android:id="@+id/location"
+                android:text="Location"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/deleverto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/addressLine"
+                android:text="AddressLine"
+                android:layout_below="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="80dp"
@@ -16,6 +67,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/order_summary_recycleview"
         android:layout_centerInParent="true"
+        android:layout_below="@id/address_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/relativeLayout">
@@ -48,15 +100,7 @@
             android:layout_height="wrap_content">
         </TextView>
 
-        <TextView
-            android:id="@+id/change_address_textview"
-            android:layout_width="wrap_content"
-            android:text="change address"
-            android:layout_alignBottom="@id/amount"
-            android:layout_marginRight="5dp"
-            android:layout_toStartOf="@id/payment_button"
-            android:visibility="gone"
-            android:layout_height="wrap_content" />
+
         <Button
 
             android:layout_alignParentEnd="true"
@@ -67,16 +111,5 @@
             android:text="Payment"
             android:visibility="visible"
             />
-        <Button
-
-            android:layout_alignParentEnd="true"
-            android:id="@+id/change_address_button"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Select Address"
-            android:visibility="gone"
-            />
-
     </RelativeLayout>
 </RelativeLayout>

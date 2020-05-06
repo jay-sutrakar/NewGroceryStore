@@ -19,10 +19,9 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".MainActivity2"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
 
+        <activity android:name=".MapActivity">
+        </activity>
 
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".PaymentActivity" />
@@ -33,7 +32,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MapActivity">
+        <activity android:name=".MainActivity2"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

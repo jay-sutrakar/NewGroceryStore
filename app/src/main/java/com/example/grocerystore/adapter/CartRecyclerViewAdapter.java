@@ -144,7 +144,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d("CartRecyclerViewAdapter", "onSuccess: item succesfully deleted from cart");
+                            Log.d("CartRecyclerViewAdapter", "onSuccess: item successfully deleted from cart");
                         }
                     });
 
