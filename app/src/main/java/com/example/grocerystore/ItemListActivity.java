@@ -118,8 +118,8 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
-                break;
+            //case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
+              //  break;
 
             case R.id.search_button:
                 searchView = (SearchView) item.getActionView();

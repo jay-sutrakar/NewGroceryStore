@@ -18,9 +18,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocerystore.adapter.ItemRecyclerViewAdapter;
+import com.example.grocerystore.util.Product;
 import com.example.grocerystore.util.UserAddress;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     private TextView locationName;
     private TextView addressLine;
     private List<String> availableInCity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +77,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         collectionReference = db.collection("Products");
-
-
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
@@ -185,6 +187,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         return super.onCreateOptionsMenu(menu);
 
     }
+
 
     @Override
     protected void onStart() {
