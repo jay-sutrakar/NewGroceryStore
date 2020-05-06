@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         loadingBar.dismiss();
-                        startActivity(new Intent(MainActivity.this, ItemListActivity.class));
+                        startActivity(new Intent(MainActivity.this, MainActivity2.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
