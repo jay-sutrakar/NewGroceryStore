@@ -118,8 +118,8 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
-                break;
+            //case R.id.cart_menu: startActivity(new Intent(ItemListActivity.this, CartActivity.class));
+              //  break;
 
             case R.id.search_button:
                 searchView = (SearchView) item.getActionView();
@@ -160,48 +160,7 @@ public class ItemListActivity extends AppCompatActivity implements NavigationVie
 
             case R.id.nav_delete_my_account:
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                final EditText verifyPassword = new EditText(this);
-                alertDialog.setTitle("Deleting Account...");
-                alertDialog.setMessage("Are you sure?");
 
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AlertDialog.Builder verifyPasswordDialog = new AlertDialog.Builder(alertDialog.getContext());
-                        verifyPasswordDialog.setTitle("Deleting Account...");
-                        verifyPasswordDialog.setMessage("Please Enter your password to confirm...");
-                        verifyPasswordDialog.setView(verifyPassword);
-
-                        verifyPasswordDialog.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                db.collection("Customers").document(user.getUid()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(ItemListActivity.this, "Account deleted successfully", Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(ItemListActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d("Delete Account", "Failed with exception: " + e.toString());
-                                        Toast.makeText(ItemListActivity.this, "Failed...", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
