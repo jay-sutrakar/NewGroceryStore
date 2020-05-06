@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 userApi.setUserContactNumber(snapshot.getString("phone"));
                                             }
                                             loadingBar.dismiss();
-                                            startActivity(new Intent(LoginActivity.this, ItemListActivity.class));
+                                            startActivity(new Intent(LoginActivity.this, MainActivity2.class));
                                             finish();
                                         }
 

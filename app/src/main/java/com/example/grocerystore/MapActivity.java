@@ -184,7 +184,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setAsLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MapActivity.this,MainActivity.class));
+                startActivity(new Intent(MapActivity.this,MainActivity2.class));
                 finish();
             }
         });

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ServiceNotAvailable">
+<RelativeLayout
+    android:background="@color/light_bg_dark_secondary_text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="231dp"
+        android:layout_height="211dp"
+        android:layout_above="@id/sorry"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_sentiment_dissatisfied_black_24dp">
+
+    </ImageView>
+    <TextView
+        android:layout_centerInParent="true"
+        android:id="@+id/sorry"
+        android:textSize="70sp"
+        android:text="Sorry !"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+    <TextView
+        android:layout_below="@+id/sorry"
+        android:gravity="center"
+        android:text="We are not available here"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+</RelativeLayout>
+</FrameLayout>
