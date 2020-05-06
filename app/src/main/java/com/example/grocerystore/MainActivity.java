@@ -42,7 +42,7 @@ import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
     private Button mainLoginButton, mainJoinNowButton;
-    private ProgressDialog loadingBar;
+    public ProgressDialog loadingBar;
     private FirebaseAuth firebaseAuth;
 
     @Override
