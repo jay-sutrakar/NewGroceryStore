@@ -127,7 +127,7 @@
                 android:id="@+id/user_profile_change_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/buttons"
+                android:background="@drawable/round_bg"
                 android:text="Change Password"
                 android:textAllCaps="false"
                 >
