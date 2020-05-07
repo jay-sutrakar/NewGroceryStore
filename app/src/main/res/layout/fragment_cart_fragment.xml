@@ -25,20 +25,20 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-
+            android:layout_above="@id/placeorder"
             android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/placeorder"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center"-->
-<!--            android:alpha="0.75"-->
-<!--            android:text="Place order"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:textSize="20sp">-->
-<!--        </com.google.android.material.button.MaterialButton>-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/placeorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:alpha="0.75"
+            android:text="Place order"
+            android:layout_alignParentBottom="true"
+            android:textSize="20sp">
+        </com.google.android.material.button.MaterialButton>
     </RelativeLayout>
 </FrameLayout>

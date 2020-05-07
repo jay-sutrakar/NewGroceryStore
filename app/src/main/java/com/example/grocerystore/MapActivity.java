@@ -6,8 +6,10 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -112,7 +114,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Marker origin;
     // The entry point to the Places API.
     private PlacesClient mPlacesClient;
-
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
@@ -152,6 +153,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private RelativeLayout relativeLayout;
 
     //Used to save the detail of user Address
+    private SharedPreferences sharedPreferences;
     private UserAddress userAddress;
 
     @Override
@@ -202,6 +204,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         materialSearchBar.setNavButtonEnabled(true);
 
 
+    // here initiating shared preference for userAddress store
+        sharedPreferences = getSharedPreferences("User_address_data",Context.MODE_PRIVATE);
 
 
         final AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
@@ -758,6 +762,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                 Address obj = addresses.get(0);
                 String add = obj.getAddressLine(0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("City",obj.getLocality());
+                editor.putString("Addressline",add);
+                editor.commit();
                 userAddress.getInstance().setAddressline(add);
                 userAddress.getInstance().setPinCode(obj.getPostalCode());
                 userAddress.getInstance().setCity(obj.getLocality());
@@ -782,6 +790,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onStart() {
         super.onStart();
+
     }
 
     @Override

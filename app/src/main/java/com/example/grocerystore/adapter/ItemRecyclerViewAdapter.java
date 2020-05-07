@@ -128,7 +128,6 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
             DocumentReference documentReference = db.collection("Cart")
                     .document(user.getUid()).collection("products").document(product.getProductId());
-
             documentReference.set(product).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {

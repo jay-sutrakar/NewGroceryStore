@@ -46,6 +46,7 @@ public class Cart_fragment extends Fragment {
     private List<Product> productList;
     private Product product;
     private ImageView emptyCart;
+    private Button placeOrder;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -83,7 +84,6 @@ public static Cart_fragment newInstance(String param1, String param2) {
         progressDialog.show();
 
         //if user click on place order button
-        //placeorder.setOnClickListener(this);
 
     }
 
@@ -91,7 +91,10 @@ public static Cart_fragment newInstance(String param1, String param2) {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart_fragment,container,false);
+        placeOrder = view.findViewById(R.id.placeorder);
+
         recyclerView = view.findViewById(R.id.cart_recyclerview);
+
         emptyCart= view.findViewById(R.id.emptyCart);
         emptyCart.setVisibility(View.INVISIBLE);
 
@@ -126,6 +129,12 @@ public static Cart_fragment newInstance(String param1, String param2) {
             public void onFailure(@NonNull Exception e) {
                 Log.d("CartActivity","Failed "+e.getMessage());
                 progressDialog.dismiss();
+            }
+        });
+        placeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),OrderSummary.class));
             }
         });
 
