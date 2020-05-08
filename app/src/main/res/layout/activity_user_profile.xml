@@ -37,14 +37,12 @@
                 android:background="@color/colorPrimary">
 
                 <ImageView
-                    android:id="@+id/user_profile_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/profile_round"
                     />
 
                 <TextView
-                    android:id="@+id/user_profile_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="\@appsnippuser"

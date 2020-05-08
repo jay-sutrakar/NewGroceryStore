@@ -200,18 +200,17 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(sharedPreferences.contains("City") && sharedPreferences.contains("Addressline")) {
+        if (sharedPreferences.contains("City") && sharedPreferences.contains("Addressline")) {
             UserAddress.getInstance().setCity(sharedPreferences.getString("City",null));
             UserAddress.getInstance().setAddressline(sharedPreferences.getString("Addressline",null));
             locationName.setText(UserAddress.getInstance().getCity());
             addressLine.setText(UserAddress.getInstance().getAddressline());
-        }else{
+        } else {
             startActivity(new Intent(MainActivity2.this,MapActivity.class));
             finish();
         }
