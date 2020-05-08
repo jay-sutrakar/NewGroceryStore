@@ -29,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderSummary extends AppCompatActivity implements View.OnClickListener {
+public class OrderSummary extends AppCompatActivity implements View.OnClickListener,OrderSummaryRecyclerView.OnAmountChangeListener {
     private FirebaseFirestore db;
     private FirebaseUser user;
     private CollectionReference collectionReference;
@@ -45,6 +45,11 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     private Button changeAddress;
     private TextView deleveryLocation;
     private TextView deleveryAddressline;
+    private AmountListener listener;
+
+    public interface AmountListener{
+        void paymentAmount(String amount);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +120,9 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.payment_button:
-                startActivity(new Intent(OrderSummary.this,PaymentActivity.class));
+                Intent intent = new Intent(this,PaymentActivity.class);
+                intent.putExtra("amount",amountText.getText());
+                startActivity(intent);
                 break;
             case R.id.change_address_button:
                 startActivity(new Intent(OrderSummary.this,MapActivity.class));
@@ -134,5 +141,13 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
+    }
+
+    @Override
+    public void amountChange(String amount) {
+        double amt = Double.parseDouble(amount);
+        double tamt = Double.parseDouble(amountText.getText().toString());
+        tamt = tamt-amt;
+        amountText.setText(String.valueOf(tamt));
     }
 }

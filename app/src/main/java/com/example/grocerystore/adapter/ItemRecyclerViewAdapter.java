@@ -143,24 +143,6 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 }
             });
 
-            CollectionReference collectionReference;
-            collectionReference = db.collection("Cart").document(user.getUid()).collection("products");
-
-            collectionReference.add(product)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            progressDialog.dismiss();
-                            addedToCartTextView.setVisibility(View.VISIBLE);
-                            addToCart.setEnabled(false);
-                            Log.d("TAG", "onSuccess: item Added");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
         }
     }
 }

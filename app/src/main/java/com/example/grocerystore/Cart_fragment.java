@@ -108,6 +108,10 @@ public static Cart_fragment newInstance(String param1, String param2) {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (queryDocumentSnapshots.isEmpty()) {
                             Log.d("TAG", "onSuccess: listEmpty");
+                            progressDialog.dismiss();
+                            placeOrder.setVisibility(View.INVISIBLE);
+                            emptyCart.setVisibility(View.VISIBLE);
+
                         } else {
 
                             List<Product> p = queryDocumentSnapshots.toObjects(Product.class);
@@ -127,7 +131,7 @@ public static Cart_fragment newInstance(String param1, String param2) {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("CartActivity","Failed "+e.getMessage());
+                    Log.d("CartActivity","Failed "+e.getMessage());
                 progressDialog.dismiss();
             }
         });
