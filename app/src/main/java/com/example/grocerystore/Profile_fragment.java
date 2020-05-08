@@ -2,6 +2,7 @@ package com.example.grocerystore;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,8 +20,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocerystore.util.UserApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +41,8 @@ public class Profile_fragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private Button changePassword;
     private FirebaseUser user;
+    private TextView usernameDisplayTop, accountInfoUsername, accountInfoPhone, accountInfoEmail, accountInfoAddress;
+    private TextView changeUsername;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -86,6 +91,10 @@ public class Profile_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         profileImage = view.findViewById(R.id.user_profile_image);
         changePassword = view.findViewById(R.id.user_profile_change_password);
+        usernameDisplayTop = view.findViewById(R.id.user_profile_username);
+        accountInfoUsername = view.findViewById(R.id.user_accountinfo_username);
+        accountInfoPhone = view.findViewById(R.id.user_accountinfo_phone);
+        accountInfoEmail = view.findViewById(R.id.user_accountinfo_email);
 
         StorageReference profileReference = storageReference.child("Customers/" + firebaseAuth.getCurrentUser().getUid() + "profile.jpg");
         profileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -94,6 +103,7 @@ public class Profile_fragment extends Fragment {
                 Picasso.get().load(uri).into(profileImage);
             }
         });
+
 
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +151,16 @@ public class Profile_fragment extends Fragment {
                 passwordResetDialog.create().show();
             }
         });
+        
+        loadUserInfo();
         return view;
+    }
+
+    private void loadUserInfo() {
+        usernameDisplayTop.setText("Hello " + UserApi.getInstance().getUsername());
+        accountInfoUsername.setText(UserApi.getInstance().getUsername());
+        accountInfoPhone.setText(UserApi.getInstance().getUserContactNumber());
+        accountInfoEmail.setText(UserApi.getInstance().getUserEmail());
     }
 
     @Override
@@ -177,4 +196,13 @@ public class Profile_fragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (FirebaseAuth.getInstance().getCurrentUser() ==  null) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+    }
+
 }

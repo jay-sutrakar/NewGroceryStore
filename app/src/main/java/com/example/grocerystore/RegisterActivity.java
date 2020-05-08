@@ -120,6 +120,9 @@ public class RegisterActivity extends AppCompatActivity {
                                         loadingBar.dismiss();
                                         Toast.makeText(RegisterActivity.this, "Account created", Toast.LENGTH_SHORT)
                                                 .show();
+                                        Toast.makeText(RegisterActivity.this, "Please Login now...", Toast.LENGTH_SHORT)
+                                                .show();
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     }
                                 });
                     }

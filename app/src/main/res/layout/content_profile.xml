@@ -34,6 +34,13 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_edit"
+                android:layout_marginStart="310dp"/>
+
+            <TextView
+                android:id="@+id/user_accountinfo_username"
                 android:text="developer"
                 android:layout_toRightOf="@id/nameImageView"
                 style="@style/profileDetailsMiniText" />
@@ -53,9 +60,16 @@
                 style="@style/profileDetailsTextMain"/>
 
             <TextView
+                android:id="@+id/user_accountinfo_phone"
                 android:text="+91-8129999999"
                 android:layout_toRightOf="@id/mobileImageView"
                 style="@style/profileDetailsMiniText" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_edit"
+                android:layout_marginStart="310dp"/>
 
         </RelativeLayout>
 
@@ -72,9 +86,16 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:id="@+id/user_accountinfo_email"
                 android:text="developer@appsnipp.com"
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsMiniText" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_edit"
+                android:layout_marginStart="310dp"/>
 
         </RelativeLayout>
 
@@ -91,9 +112,16 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:id="@+id/user_accountinfo_address"
                 android:text="Avenue 2nd Street NW SY."
                 android:layout_toRightOf="@id/addressImageView"
                 style="@style/profileDetailsMiniText" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_edit"
+                android:layout_marginStart="310dp"/>
 
         </RelativeLayout>
 
