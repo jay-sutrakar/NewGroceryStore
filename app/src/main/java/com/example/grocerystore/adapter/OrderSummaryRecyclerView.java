@@ -20,10 +20,18 @@ import java.util.List;
 public class OrderSummaryRecyclerView extends RecyclerView.Adapter<OrderSummaryRecyclerView.ViewHolder> {
     private Context context;
     private List<Product> productList;
-
+    private OnAmountChangeListener listener;
+    public interface OnAmountChangeListener{
+         void amountChange(String amount);
+    }
     public OrderSummaryRecyclerView(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        try {
+            listener = (OnAmountChangeListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(e+"Must Implement OrderSummaryRecyclerView.OnAmountChangeListener");
+        }
     }
 
     @NonNull
@@ -75,9 +83,9 @@ public class OrderSummaryRecyclerView extends RecyclerView.Adapter<OrderSummaryR
                 case R.id.product_remove:
                     Product p = productList.get(getAdapterPosition());
                     productList.remove(p);
+                    listener.amountChange(p.getProductDiscountPrice());
                     notifyItemRemoved(getAdapterPosition());
                     break;
-
             }
         }
     }
