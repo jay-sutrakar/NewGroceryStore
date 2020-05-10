@@ -26,7 +26,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocerystore.adapter.CartRecyclerViewAdapter;
 import com.example.grocerystore.util.UserAddress;
+import com.example.grocerystore.util.UserApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,7 +44,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , CartRecyclerViewAdapter.OnProductListChange {
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawer;
     private FirebaseAuth firebaseAuth;
@@ -58,6 +60,9 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+
+        Log.d("mainActivity 2", "onCreate: "+ UserApi.getInstance().getUsername());
         //Using shared preference to get user location data
         sharedPreferences = getSharedPreferences("User_address_data", Context.MODE_PRIVATE);
 
@@ -92,7 +97,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(HomeFragment.newInstance("",""));
     }
@@ -114,6 +118,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                             openFragment(HomeFragment.newInstance("",""));
                             break;
                         case R.id.nav_cart:
+
                             openFragment(Cart_fragment.newInstance("",""));
                             break;
                         case R.id.nav_notification:
@@ -214,5 +219,13 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
             startActivity(new Intent(MainActivity2.this,MapActivity.class));
             finish();
         }
+    }
+
+    @Override
+    public void listSize(int s) {
+        if(s==0){
+            bottomNavigationView.getOrCreateBadge(R.id.nav_cart).setVisible(false);
+        }
+        bottomNavigationView.getOrCreateBadge(R.id.nav_cart).setNumber(s);
     }
 }

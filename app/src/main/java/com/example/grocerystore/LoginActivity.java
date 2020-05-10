@@ -113,11 +113,12 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                         if(!queryDocumentSnapshots.isEmpty()){
                                             for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
-                                                UserApi userApi = UserApi.getInstance();
-                                                userApi.setUsername(snapshot.getString("username"));
-                                                userApi.setUserEmail(snapshot.getString("email"));
-                                                userApi.setUserId(snapshot.getString("userId"));
-                                                userApi.setUserContactNumber(snapshot.getString("phone"));
+                                                Log.d("LoginActivity", "onEvent: "+snapshot.getString("username"));
+
+                                                UserApi.getInstance().setUsername(snapshot.getString("username"));
+                                                UserApi.getInstance().setUserEmail(snapshot.getString("email"));
+                                                UserApi.getInstance().setUserId(snapshot.getString("userId"));
+                                                UserApi.getInstance().setUserContactNumber(snapshot.getString("phone"));
                                             }
                                             loadingBar.dismiss();
                                             startActivity(new Intent(LoginActivity.this, MainActivity2.class));

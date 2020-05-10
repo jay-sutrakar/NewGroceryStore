@@ -32,10 +32,21 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     private List<Product> productList;
     private AlertDialog.Builder builder;
     private AlertDialog alertDialog;
+    private OnProductListChange listener;
+
+    public interface OnProductListChange {
+        void listSize(int s);
+    }
 
     public CartRecyclerViewAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        try {
+            listener = (OnProductListChange) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(e + "Must implement interface OnProductListChange");
+        }
+        listener.listSize(productList.size());
     }
 
     @NonNull
@@ -134,6 +145,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         private void removeItem(int adapterPosition) {
             Product product = productList.get(adapterPosition);
             productList.remove(product);
+            listener.listSize(productList.size());
             removeFromDatabase(product.getProductId());
             notifyItemRemoved(adapterPosition);
         }

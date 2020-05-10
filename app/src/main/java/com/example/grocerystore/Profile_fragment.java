@@ -35,6 +35,7 @@ import com.squareup.picasso.Picasso;
 
 
 public class Profile_fragment extends Fragment {
+
     private ImageView profileImage;
     final private int galleryPick = 1000;
     private StorageReference storageReference;
@@ -89,6 +90,7 @@ public class Profile_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
         profileImage = view.findViewById(R.id.user_profile_image);
         changePassword = view.findViewById(R.id.user_profile_change_password);
         usernameDisplayTop = view.findViewById(R.id.user_profile_username);
@@ -157,6 +159,7 @@ public class Profile_fragment extends Fragment {
     }
 
     private void loadUserInfo() {
+
         usernameDisplayTop.setText("Hello " + UserApi.getInstance().getUsername());
         accountInfoUsername.setText(UserApi.getInstance().getUsername());
         accountInfoPhone.setText(UserApi.getInstance().getUserContactNumber());
