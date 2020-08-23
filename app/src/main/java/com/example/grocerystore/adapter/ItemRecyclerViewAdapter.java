@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.grocerystore.ItemListActivity;
+//import com.example.grocerystore.ItemListActivity;
 import com.example.grocerystore.MainActivity;
 import com.example.grocerystore.R;
 import com.example.grocerystore.util.Product;

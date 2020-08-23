@@ -4,97 +4,97 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/findLocation"
-        android:layout_margin="15dp"
-        android:text="Use my location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Button>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/note"
-            android:text="Note: Field must be filled"
-            android:textColor="@color/deep_orange_900"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--    <Button-->
+<!--        android:id="@+id/findLocation"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:text="Use my location"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </Button>-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<!--        <TextView-->
+<!--            android:id="@+id/note"-->
+<!--            android:text="Note: Field must be filled"-->
+<!--            android:textColor="@color/deep_orange_900"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-        </TextView>
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_margin="15dp"
-        android:inputType="textPersonName"
-        android:layout_height="wrap_content"
-        android:hint="Name*"/>
+<!--        </TextView>-->
+<!--    <EditText-->
+<!--        android:id="@+id/name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Name*"/>-->
 
-    <EditText
-        android:id="@+id/address"
-        android:layout_below="@id/name"
-        android:layout_width="match_parent"
-        android:layout_margin="15dp"
-        android:layout_height="wrap_content"
+<!--    <EditText-->
+<!--        android:id="@+id/address"-->
+<!--        android:layout_below="@id/name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:layout_height="wrap_content"-->
 
-        android:inputType="textPostalAddress"
-        android:hint="Address">
-    
-    </EditText>
-        <EditText
-            android:id="@+id/landmark"
-            android:layout_margin="15dp"
-            android:layout_width="match_parent"
-            android:hint="Landmark"
-            android:layout_below="@id/address"
-            android:layout_height="wrap_content">
+<!--        android:inputType="textPostalAddress"-->
+<!--        android:hint="Address">-->
+<!--    -->
+<!--    </EditText>-->
+<!--        <EditText-->
+<!--            android:id="@+id/landmark"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:hint="Landmark"-->
+<!--            android:layout_below="@id/address"-->
+<!--            android:layout_height="wrap_content">-->
 
-        </EditText>
-    <EditText
-        android:id="@+id/city"
-        android:layout_margin="15dp"
-        android:layout_below="@id/landmark"
-        android:hint="City"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-    </EditText>
-    <EditText
-        android:id="@+id/state"
-        android:layout_margin="15dp"
-        android:layout_width="match_parent"
-        android:layout_below="@id/city"
-        android:layout_height="wrap_content"
-        android:hint="State">
-    </EditText>
-    <EditText
-        android:id="@+id/zipcode"
-        android:inputType="number"
-        android:layout_margin="15dp"
-        android:layout_below="@id/state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Zip code ">
+<!--        </EditText>-->
+<!--    <EditText-->
+<!--        android:id="@+id/city"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:layout_below="@id/landmark"-->
+<!--        android:hint="City"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        -->
+<!--    </EditText>-->
+<!--    <EditText-->
+<!--        android:id="@+id/state"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_below="@id/city"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="State">-->
+<!--    </EditText>-->
+<!--    <EditText-->
+<!--        android:id="@+id/zipcode"-->
+<!--        android:inputType="number"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:layout_below="@id/state"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Zip code ">-->
 
-    </EditText>
+<!--    </EditText>-->
 
-    <EditText
-        android:id="@+id/phoneNumber"
-        android:hint="Phone number"
-        android:layout_margin="15dp"
-        android:inputType="phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/zipcode"
-        ></EditText>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/save_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Save">
+<!--    <EditText-->
+<!--        android:id="@+id/phoneNumber"-->
+<!--        android:hint="Phone number"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:inputType="phone"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/zipcode"-->
+<!--        ></EditText>-->
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/save_address"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:text="Save">-->
 
 
-    </com.google.android.material.button.MaterialButton>
-    </RelativeLayout>
+<!--    </com.google.android.material.button.MaterialButton>-->
+<!--    </RelativeLayout>-->
 </LinearLayout>

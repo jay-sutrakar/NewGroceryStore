@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
-        android:text="Choose your address "
-        android:textSize="25sp"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TextView>
-    <TextView
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:text="Note : Please add address "
-        android:textColor="@color/deep_orange_A700"
-        android:layout_height="wrap_content">
+<!--    <TextView-->
+<!--        android:text="Choose your address "-->
+<!--        android:textSize="25sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </TextView>-->
+<!--    <TextView-->
+<!--        android:padding="10dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:text="Note : Please add address "-->
+<!--        android:textColor="@color/deep_orange_A700"-->
+<!--        android:layout_height="wrap_content">-->
 
-    </TextView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/addressRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-    </androidx.recyclerview.widget.RecyclerView>
+<!--    </TextView>-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/addressRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone">-->
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
 
-    <Button
-        android:id="@+id/add_address_button"
-        android:layout_alignParentBottom="true"
-        android:text="Add new Address"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Button>
+<!--    <Button-->
+<!--        android:id="@+id/add_address_button"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:text="Add new Address"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </Button>-->
 </LinearLayout>

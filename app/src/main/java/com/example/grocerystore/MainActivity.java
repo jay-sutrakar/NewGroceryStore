@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(this,ItemListActivity.class));
+            startActivity(new Intent(this,MainActivity2.class));
             finish();
         }
     }

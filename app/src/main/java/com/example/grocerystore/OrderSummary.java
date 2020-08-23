@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystore.adapter.OrderSummaryRecyclerView;
-import com.example.grocerystore.util.AddressDialog;
+//import com.example.grocerystore.util.AddressDialog;
 import com.example.grocerystore.util.Product;
 import com.example.grocerystore.util.UserAddress;
 import com.google.android.gms.tasks.OnFailureListener;

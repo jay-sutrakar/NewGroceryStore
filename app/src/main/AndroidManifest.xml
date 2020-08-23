@@ -26,12 +26,8 @@
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".OrderSummary" />
-        <activity android:name=".CartActivity" />
-        <activity
-            android:name=".ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
+
         <activity android:name=".MainActivity2"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar">
