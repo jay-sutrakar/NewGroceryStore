@@ -47,60 +47,60 @@ public class UserProfileActivity extends AppCompatActivity {
         changePassword = (Button) findViewById(R.id.user_profile_change_password);
         user = firebaseAuth.getCurrentUser();
 
-        StorageReference profileReference = storageReference.child("Customers/" + firebaseAuth.getCurrentUser().getUid() + "profile.jpg");
-        profileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(profileImage);
-            }
-        });
+//        StorageReference profileReference = storageReference.child("Customers/" + firebaseAuth.getCurrentUser().getUid() + "profile.jpg");
+//        profileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Picasso.get().load(uri).into(profileImage);
+//            }
+//        });
 
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent openGallleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGallleryIntent, galleryPick);
-            }
-        });
+//        profileImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent openGallleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(openGallleryIntent, galleryPick);
+//            }
+//        });
 
-        changePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final EditText resetPassword = new EditText(v.getContext());
-                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
-                passwordResetDialog.setTitle("Change Password");
-                passwordResetDialog.setMessage("Enter new password");
-                passwordResetDialog.setView(resetPassword);
-
-                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newPassword = resetPassword.getText().toString();
-                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(UserProfileActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(UserProfileActivity.this, "Failed...", Toast.LENGTH_SHORT).show();
-                                Log.d("Passoword changing:", "Failed with exception: " + e.toString());
-                            }
-                        });
-                    }
-                });
-                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                passwordResetDialog.create().show();
-            }
-        });
+//        changePassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final EditText resetPassword = new EditText(v.getContext());
+//                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+//                passwordResetDialog.setTitle("Change Password");
+//                passwordResetDialog.setMessage("Enter new password");
+//                passwordResetDialog.setView(resetPassword);
+//
+//                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String newPassword = resetPassword.getText().toString();
+//                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//                                Toast.makeText(UserProfileActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Toast.makeText(UserProfileActivity.this, "Failed...", Toast.LENGTH_SHORT).show();
+//                                Log.d("Passoword changing:", "Failed with exception: " + e.toString());
+//                            }
+//                        });
+//                    }
+//                });
+//                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//
+//                passwordResetDialog.create().show();
+//            }
+//        });
     }
 
     @Override

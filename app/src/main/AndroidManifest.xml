@@ -27,6 +27,7 @@
         <activity android:name=".PaymentActivity" />
         <activity android:name=".OrderSummary" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
 
         <activity android:name=".MainActivity2"
             android:label=""

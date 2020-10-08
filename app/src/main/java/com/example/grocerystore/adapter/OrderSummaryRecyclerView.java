@@ -20,6 +20,7 @@ import java.util.List;
 public class OrderSummaryRecyclerView extends RecyclerView.Adapter<OrderSummaryRecyclerView.ViewHolder> {
     private Context context;
     private List<Product> productList;
+
     private OnAmountChangeListener listener;
     public interface OnAmountChangeListener{
          void amountChange(String amount);

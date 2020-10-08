@@ -135,6 +135,7 @@ public static Cart_fragment newInstance(String param1, String param2) {
                 progressDialog.dismiss();
             }
         });
+
         placeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
